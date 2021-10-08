@@ -1,0 +1,19 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(91, 108, 112);
+    padding: 10px;
+    text-align:center;
+    font-size: 24px;
+  }
+
+  .item a{
+  color: white;
+  text-decoration: none;
+
+  }
+
+  .item a.activeLink{
+    color: grey;
+  }
+
+  
