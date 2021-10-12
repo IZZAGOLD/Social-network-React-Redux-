@@ -107,7 +107,7 @@ export const getUsersThunkCreator2 = (pageNumber, pageSize) => {
 }
 export const unfollowUsersCreator = (id) => {
     return (dispatch) => {
-        dispatch(toggleIsFetching(true, id))
+        dispatch(toggleFollowingProgress(true, id))
         usersAPI.unfollowUser(id)
             .then(response => {
                 if (response.data.resultCode == 0) {
@@ -119,7 +119,7 @@ export const unfollowUsersCreator = (id) => {
 }
 export const followUsersCreator = (id) => {
     return (dispatch) => {
-        dispatch(toggleIsFetching(true, id))
+        dispatch(toggleFollowingProgress(true, id))
         usersAPI.followUser(id)
             .then(response => {
                 if (response.data.resultCode == 0) {

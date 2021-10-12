@@ -12,24 +12,23 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`, {})
             .then(response => response.data)
     },
-    getAuth() {
-        return instance.get(`auth/me`)
-            .then(response => response.data)
-
-    },
-    loadProfileMe(meUserId) {
-        return instance.get(`profile/${meUserId}`)
-            .then(response => response.data)
+    loadProfileMe(myId) {
+        return instance.get(`profile/${myId}`)
     },
     loadProfile(userId) {
         return instance.get(`profile/${userId}`)
-            .then(response => response.data)
     },
     unfollowUser(id) {
         return instance.delete(`follow/${id}`)// del принимает withCredentials вторым параметром
     },
     followUser(id) {
         return instance.post(`follow/${id}`, null)// post withCredentials третьим
+    }
+}
+
+export const authAPI = {
+    getAuth() {
+        return instance.get(`auth/me`)
     }
 }
 
@@ -40,18 +39,5 @@ export const getAuth = () => {
             .then(response => response.data)
     )
 }
-// Загрузка своего профиля
-export const loadProfileMe = (meUserId) => {
-    return (
-        instance.get(`profile/${meUserId}`)
-            .then(response => response.data)
-    )
-}
-// Загрузка профайла
-export const loadProfile = (userId) => {
-    return (
-        instance.get(`profile/${userId}`)
-            .then(response => response.data)
-    )
-}
+
 

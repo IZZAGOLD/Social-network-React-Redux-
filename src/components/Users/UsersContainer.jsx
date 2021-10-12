@@ -30,7 +30,6 @@ class UsersContainer extends React.Component {
                        followingInProgress={this.props.followingInProgress}
                        totalUsersCount={this.props.totalUsersCount}
                        onPageChanged={this.onPageChanged}
-
                        setUsers={this.props.setUsers}
                        users={this.props.users}
                        setCurrentPage={this.props.setCurrentPage}

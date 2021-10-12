@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const ADD_POST = 'ADD_POST'; // добавляем пост в Профайле
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'; // обновляем стейт при наборе поста
 const SET_USER_PROFILE = 'SET_USER_PROFILE'; // обновляем стейт при наборе поста
@@ -24,12 +26,6 @@ const profileReducer = (state = initialState, action) => {
                 newPostText: '',
                 postData: [...state.postData, newPost]
             };
-        // let stateCopy = { ...state };
-        // stateCopy.postData = [...state.postData];
-        // stateCopy.postData.push(newPost);
-        // stateCopy.newPostText = '';
-        // return stateCopy;
-
         case UPDATE_NEW_POST_TEXT:
             return {
                 ...state,
@@ -40,14 +36,6 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.profile
             };
-
-
-
-        // {
-        //     let stateCopy = { ...state };
-        //     stateCopy.newPostText = action.newText;
-        //     return stateCopy;
-        // };
         default: return state;
     }
 }
@@ -56,5 +44,24 @@ export const updateNewPostTextCreateAction = (text) =>
 
 export const addPostCreateAction = () => ({ type: ADD_POST })
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile })
+
+export const loadMyProfileCreator = (myId) => {
+    return (dispatch) => {
+        usersAPI.loadProfileMe(myId)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            })
+    }
+}
+export const loadProfileCreator = (userId) => {
+    return (dispatch) => {
+        usersAPI.loadProfile(userId)
+            .then(response => {
+                dispatch(setUserProfile(response.data));
+            })
+    }
+}
+
+
 
 export default profileReducer;

@@ -1,32 +1,27 @@
 import React from "react";
 import Profile from "./Profile"
-import * as axios from "axios";
+
 import {connect} from "react-redux";
-import {setUserProfile} from "../../Redux/profile-reducer";
-import {withRouter} from "react-router-dom";
-import {loadProfile, loadProfileMe} from "../../api/api";
+import {loadMyProfileCreator, loadProfileCreator, setUserProfile} from "../../Redux/profile-reducer";
+import {Redirect, withRouter} from "react-router-dom";
 
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let userIdMe = this.props.meUserId
+        let myId = this.props.meUserId
         let userId = this.props.match.params.userId
         // свой профиль
         if (!userId) {
-            loadProfileMe(userIdMe)
-                .then(data => {
-                    this.props.setUserProfile(data);
-                })
+            this.props.loadMyProfileCreator(myId)
         }
         //чужие профили
-        loadProfile(userId)
-            .then(data => {
-                this.props.setUserProfile(data);
-            })
+        this.props.loadProfileCreator(userId)
     }
-    render () {
+
+    render() {
+        if (this.props.isAuth == false) { return <Redirect to={"/login"} />}
         return (
-            <Profile {...this.props} profile={this.props.profile} />
+            <Profile {...this.props} profile={this.props.profile}/>
         )
     }
 }
@@ -34,7 +29,11 @@ class ProfileContainer extends React.Component {
 /// круглые скобки, потому что возвращает объект, а не тело функции
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    meUserId: state.auth.userId
+    meUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 const WithUrlDataContainerComponent = withRouter(ProfileContainer)
-export default connect(mapStateToProps, {setUserProfile})(WithUrlDataContainerComponent);
+export default connect(mapStateToProps, {
+    setUserProfile,
+    loadMyProfileCreator, loadProfileCreator
+})(WithUrlDataContainerComponent);
