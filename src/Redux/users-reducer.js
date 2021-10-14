@@ -90,7 +90,7 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
             .then(data => {
                 dispatch(toggleIsFetching(false))
                 dispatch(setUsers(data.items))
-                dispatch(setTotalUsersCount((data.totalCount) / 100)); /// !!!!!!!!!!!! ///
+                dispatch(setTotalUsersCount((data.totalCount) / 10)); /// !!!!!!!!!!!! ///
             })
     }
 }

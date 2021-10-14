@@ -23,6 +23,12 @@ export const usersAPI = {
     },
     followUser(id) {
         return instance.post(`follow/${id}`, null)// post withCredentials третьим
+    },
+    updateStatus(status) {
+        return instance.put('profile/status', {status:status})
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`)
     }
 }
 

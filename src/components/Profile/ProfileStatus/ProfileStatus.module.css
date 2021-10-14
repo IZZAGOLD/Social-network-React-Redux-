@@ -1,0 +1,21 @@
+.inputStatus {
+    width: 35%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+.input:focus {
+    color: #000000;
+    border: 1px solid #000000
+}
+
+.input {
+    width: 100%;
+    padding: 7px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    font-family: Courier New, Courier, monospace;
+    transition: background-color 0.3s ease-in-out;
+    outline: none;
+}
