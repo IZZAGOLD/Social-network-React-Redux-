@@ -1,9 +1,10 @@
 // import s from './Profile.module.css';
 import hacker from './hacker.PNG';
+import Preloader from "../../common/Preloader";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
-        return <div>1</div>
+        return <Preloader />
     }
 
     return (

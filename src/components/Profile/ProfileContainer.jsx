@@ -15,15 +15,18 @@ import {compose} from "redux";
 
 class ProfileContainer extends React.Component {
     componentDidMount() {
-        let myId = this.props.meUserId
         let userId = this.props.match.params.userId
         // свой профиль
         if (!userId) {
-            this.props.loadMyProfileCreator(myId)
+            userId = this.props.meUserId
+            if (!userId) {
+                this.props.history.push("/login");
+            }
         }
         //чужие профили
         this.props.loadProfileCreator(userId)
-        this.props.getUserStatusCreator(myId)// Как передать чужой ID?
+        this.props.getUserStatusCreator(userId)
+        debugger
     }
 
     render() {
