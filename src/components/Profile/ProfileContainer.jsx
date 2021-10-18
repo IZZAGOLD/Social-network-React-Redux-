@@ -16,20 +16,23 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
     componentDidMount() {
         let myId = this.props.meUserId
-        let userId = this.props.meUserId || this.props.match.params.userId
+        let userId = this.props.match.params.userId
         // свой профиль
         if (!userId) {
             this.props.loadMyProfileCreator(myId)
         }
         //чужие профили
         this.props.loadProfileCreator(userId)
-        this.props.getUserStatusCreator(userId)// Как передать чужой ID?
+        this.props.getUserStatusCreator(myId)// Как передать чужой ID?
     }
 
     render() {
 
         return (
-            <Profile updateStatusCreator={this.props.updateStatusCreator}status={this.props.status} {...this.props} profile={this.props.profile}/>
+            <Profile updateStatusCreator={this.props.updateStatusCreator}
+                     status={this.props.status}
+                     {...this.props} p
+                     rofile={this.props.profile}/>
         )
     }
 }

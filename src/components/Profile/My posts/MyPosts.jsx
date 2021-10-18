@@ -1,33 +1,24 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post from './Post/Post.jsx';
+import AddPostReduxForm from "./Post/AddPostForm";
 
 
 const MyPosts = (props) => {
     const state = props.profilePage;
-    const PostsElements = state.postData.map(p => <Post message={p.message} likesCount={p.likesCount} />);
+    const PostsElements = state.postData.map(p => <Post message={p.message} likesCount={p.likesCount}/>);
 
-    const newPostElement = React.createRef();
-
-    const onAddPost = () => {
-        props.addPost();
-    }
-
-    const onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+    const onAddPost = (values) => {
+        props.addPost(values.addPost);
     }
 
     return (
         <div>
-            <div >
+            <div>
                 my post
             </div>
             <div>
-                <textarea onChange={onPostChange} ref={newPostElement} value={state.newPostText} />
-            </div>
-            <div >
-                <button onClick={onAddPost}>add post</button>
+                <AddPostReduxForm onSubmit={onAddPost}/>
             </div>
             <div>new post
                 {PostsElements}

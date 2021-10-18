@@ -2,22 +2,18 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import MessageItem from "./MessageItem/MessageItem.jsx";
 import DialogItem from "./DialogItem/DialogItem.jsx";
-import {Redirect} from "react-router-dom";
+import SendMessageReduxForm from "./SendMessageForm";
+
 
 const Dialogs = (props) => {
-    let state = props.dialogsPage;
-    let dialogsElements = state.dialogsData.map( d=> <DialogItem name={d.name} id={d.id} />);
-    let messagesElements = state.messagesData.map(m => <MessageItem messageDialog={m.message} />);
-    let newMessageText = state.newMessageText;
+    const state = props.dialogsPage;
+    const dialogsElements = state.dialogsData.map(d => <DialogItem name={d.name} id={d.id}/>);
+    const messagesElements = state.messagesData.map(m => <MessageItem messageDialog={m.message}/>);
 
-    let onSendMessage = () => {
-        props.sendMessage();
+    const onSendMessage = (values) => {
+        props.sendMessage(values.sendMessage)
     }
 
-    let onMessageChange = (e) => {
-        let body = e.target.value;
-        props.updateNewPostText(body);
-    }
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
@@ -27,12 +23,7 @@ const Dialogs = (props) => {
                 <div>{messagesElements}</div>
                 <div>
                     <div>
-                        <textarea value={newMessageText}
-                            onChange={onMessageChange}
-                            placeholder='Enter your message'></textarea>
-                    </div>
-                    <div>
-                        <button onClick={onSendMessage}>Send</button>
+                        <SendMessageReduxForm onSubmit={onSendMessage}/>
                     </div>
                 </div>
             </div>

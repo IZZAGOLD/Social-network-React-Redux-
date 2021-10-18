@@ -35,7 +35,15 @@ export const usersAPI = {
 export const authAPI = {
     getAuth() {
         return instance.get(`auth/me`)
+    },
+    getLogin(email, password, rememberMe = false) {
+        return instance.post(`auth/login`, { email, password, rememberMe })
+        debugger
+    },
+    logout() {
+        return instance.delete(`auth/login`);
     }
+
 }
 
 // Авторизация
