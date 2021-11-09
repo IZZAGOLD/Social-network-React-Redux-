@@ -4,7 +4,7 @@ import {Textarea} from "../common/FormsControl/FromsControl";
 import {maxLengthCreator, requiredField} from "../../utils/validatorss/validators";
 
 const maxLength = maxLengthCreator(300)
-
+// validate={[requiredField, maxLength]}
 const SendMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>

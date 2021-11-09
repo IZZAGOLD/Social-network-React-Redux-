@@ -1,6 +1,5 @@
 import React from "react";
 import {Redirect} from "react-router-dom";
-import Dialogs from "../components/Dialogs/Dialogs";
 import {connect} from "react-redux";
 
 let mapStateToRedirect = (state) => {

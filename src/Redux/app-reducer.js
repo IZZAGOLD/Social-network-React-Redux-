@@ -1,9 +1,10 @@
 import {getAuthCreator} from "./auth-reducer";
+
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
 
 let initialState = {
- initialized: false
+    initialized: false
 }
 
 const appReducer = (state = initialState, action) => {
@@ -13,22 +14,18 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 initialized: true,
             }
-
         default:
             return state;
     }
 }
 export const initializedSuccess = () => ({type: INITIALIZED_SUCCESS})
 
-
-export const initializeApp = () => (dispatch) =>{
-
-        let promise = dispatch(getAuthCreator())
-    debugger
-        Promise.all([promise])
-            .then(() => {
-                dispatch(initializedSuccess())
-            })
+export const initializeApp = () => (dispatch) => {
+    const promise = dispatch(getAuthCreator())
+    Promise.all([promise])
+        .then(() => {
+            dispatch(initializedSuccess())
+        })
 }
 
 
