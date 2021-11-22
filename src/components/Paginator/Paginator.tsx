@@ -2,11 +2,21 @@ import React, {useState, useEffect} from 'react';
 import styles from "./Paginator.module.css";
 import cn from 'classnames'
 
-const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
+type Props = {
+    totalItemsCount: number,
+    pageSize: number,
+    currentPage:number,
+    onPageChanged: (pageNumber: number) => void,
+    portionSize?: number//? - необязательно должно быть в props
+}
+
+
+
+const Paginator:React.FC<Props> = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
 // кол-во страниц
     let pagesCount = Math.ceil(totalItemsCount / pageSize);
 // массив страниц
-    let pages = [];
+    let pages: Array<number> = []
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
@@ -38,7 +48,7 @@ useEffect(() => {
                         [styles.selectedPage]: currentPage === p
                     }, styles.pageNumber)}
                                    key={p}
-                                   onClick={(e) => {
+                                   onClick={() => {
                                        onPageChanged(p);
                                    }}>{p}</span>
                 })}

@@ -9,7 +9,7 @@ const TOGGLE_IS_FETCHING: string = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS: string = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 
-type UserType = {
+export type UserType = {
     id: number
     name: string
     status: string
@@ -20,17 +20,14 @@ type ProfilePhotosType = {
     small: string | null
     large: string | null
 }
-type FollowingInProgress = {
-    userId: number
-    isFetching: boolean
-}
+
 let initialState = {
     users: [] as Array<UserType>,
     totalUsersCount: 0,
     pageSize: 5,
     currentPage: 1,
     isFetching: true,
-    followingInProgress: [] as Array<FollowingInProgress>
+    followingInProgress: [] as Array<number>
 }
 export type InitialStateType = typeof initialState
 const usersReducer = (state = initialState, action: any): InitialStateType => {
